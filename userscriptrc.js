@@ -9,5 +9,6 @@ module.exports = {
   downloadURL: '',
   supportURL: '',
   'run-at': 'document-body',
-  require: 'https://cdn.jsdelivr.net/npm/vue@2.6.11'
+  require: 'https://cdn.jsdelivr.net/npm/vue@2.6.11',
+  grant: 'unsafeWindow'
 }
