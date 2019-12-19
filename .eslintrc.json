@@ -1,0 +1,10 @@
+{
+    "extends": [
+        "standard",
+        "plugin:vue/essential"
+    ],
+    "globals": {
+        "$": "readonly",
+        "Vue": "readonly"
+    }
+}
