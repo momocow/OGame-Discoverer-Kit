@@ -1,6 +1,6 @@
 {
-  "name": "@momocow/ogame-explorer-kit",
-  "description": "Everything an explorer must have at hand",
+  "name": "@momocow/ogame-discoverer-kit",
+  "description": "Everything a discoverer must have at hand",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "commit": "gitmoji -c"
   },
   "devDependencies": {
+    "@kazupon/vue-i18n-loader": "^0.4.1",
     "css-loader": "^3.4.0",
     "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",
@@ -34,11 +35,16 @@
   "main": "src/main.js",
   "repository": {
     "type": "git",
-    "url": "ssh://git@192.168.1.225:30122/momocow/ogame-explorer-kit.git"
+    "url": "ssh://git@192.168.1.225:30122/momocow/ogame-discoverer-kit.git"
   },
   "keywords": [
     "ogame"
   ],
   "author": "MomoCow",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "luxon": "^1.21.3",
+    "vue-datetime": "^1.0.0-beta.11",
+    "weekstart": "^1.0.1"
+  }
 }

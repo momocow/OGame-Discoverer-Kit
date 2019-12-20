@@ -1,2 +1,2 @@
-# ogame-explorer-kit
+# OGame Discoverer Kit
 

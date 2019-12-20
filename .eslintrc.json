@@ -5,6 +5,7 @@
     ],
     "globals": {
         "$": "readonly",
-        "Vue": "readonly"
+        "Vue": "readonly",
+        "VueI18n": "readonly"
     }
 }

@@ -9,7 +9,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ogek.user.js'
+    filename: 'ogame-discoverer-kit.user.js'
   },
   module: {
     rules: [
@@ -23,6 +23,11 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
+      },
+      {
+        resourceQuery: /blockType=i18n/,
+        type: 'javascript/auto',
+        loader: '@kazupon/vue-i18n-loader'
       }
     ]
   },
