@@ -11,7 +11,14 @@ module.exports = {
   'run-at': 'document-body',
   require: [
     'https://cdn.jsdelivr.net/npm/vue@2.6.11',
-    'https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.min.js'
+    'https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.min.js',
+    'https://unpkg.com/vuex@3.1.2/dist/vuex.min.js'
   ],
-  grant: 'unsafeWindow'
+  grant: [
+    'unsafeWindow',
+    'GM_setValue',
+    'GM_getValue',
+    'GM_deleteValue',
+    'GM_addValueChangeListener'
+  ]
 }

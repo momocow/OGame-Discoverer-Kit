@@ -6,6 +6,15 @@
     "globals": {
         "$": "readonly",
         "Vue": "readonly",
-        "VueI18n": "readonly"
+        "Vuex": "readonly",
+        "VueI18n": "readonly",
+        "serverTime": "readonly",
+        "localTime": "readonly",
+        "loca": "readonly",
+        "unsafeWindow": "readonly",
+        "GM_setValue": "readonly",
+        "GM_getValue": "readonly",
+        "GM_deleteValue": "readonly",
+        "GM_addValueChangeListener": "readonly"
     }
 }

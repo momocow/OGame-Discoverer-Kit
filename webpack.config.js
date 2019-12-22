@@ -6,10 +6,15 @@ const DEV = process.env.WEBPACK_DEV_SERVER === 'true'
 
 module.exports = {
   mode: DEV ? 'development' : 'production',
-  entry: path.resolve(__dirname, 'src', 'main.js'),
+  entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'ogame-discoverer-kit.user.js'
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
   },
   module: {
     rules: [
@@ -40,6 +45,16 @@ module.exports = {
   devServer: {
     hot: false,
     liveReload: false,
-    inline: false
+    inline: false,
+    stats: {
+      warningsFilter: [
+        /Module not found: Error: Can't resolve 'weekstart(?:\/package\.json)?'/
+      ]
+    }
+  },
+  stats: {
+    warningsFilter: [
+      /Module not found: Error: Can't resolve 'weekstart(?:\/package\.json)?'/
+    ]
   }
 }

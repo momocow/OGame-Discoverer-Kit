@@ -44,7 +44,6 @@
   "license": "MIT",
   "dependencies": {
     "luxon": "^1.21.3",
-    "vue-datetime": "^1.0.0-beta.11",
-    "weekstart": "^1.0.1"
+    "vue-datetime": "^1.0.0-beta.11"
   }
 }
