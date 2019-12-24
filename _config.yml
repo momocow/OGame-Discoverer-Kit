@@ -1,1 +1,4 @@
+header_links:
+  - href: https://cow.moe/OGame-Discoverer-Kit/dist/ogame-discoverer-kit.user.js
+    text: Install
 theme: jekyll-theme-cayman
