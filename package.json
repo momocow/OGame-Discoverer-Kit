@@ -35,11 +35,16 @@
   "main": "src/main.js",
   "repository": {
     "type": "git",
-    "url": "ssh://git@192.168.1.225:30122/momocow/ogame-discoverer-kit.git"
+    "url": "git+https://github.com/momocow/OGame-Discoverer-Kit.git"
   },
   "keywords": [
-    "ogame"
+    "ogame",
+    "discoverer"
   ],
+  "bugs": {
+    "url": "https://github.com/momocow/OGame-Discoverer-Kit/issues"
+  },
+  "homepage": "https://github.com/momocow/OGame-Discoverer-Kit#readme",
   "author": "MomoCow",
   "license": "MIT",
   "dependencies": {
