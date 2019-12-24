@@ -10,4 +10,4 @@
 [立即安裝 🔧](https://cow.moe/OGame-Discoverer-Kit/dist/ogame-discoverer-kit.user.js)
 
 ## 更新日誌
-[閱讀更多 ➡️](https://cow.moe/OGame-Discoverer-Kit/CHANGELOG.md)
+[閱讀更多 ➡️](./changelog/)
