@@ -5,9 +5,9 @@ module.exports = {
   version: DEV ? '[version].dev.[buildTime]' : '[version]',
   namespace: 'code.cow.moe',
   include: 'https://*.ogame.gameforge.com/game/index.php?*',
-  updateURL: '',
-  downloadURL: '',
-  supportURL: '',
+  updateURL: 'https://cow.moe/OGame-Discoverer-Kit/dist/ogame-discoverer-kit.meta.js',
+  downloadURL: 'https://cow.moe/OGame-Discoverer-Kit/dist/ogame-discoverer-kit.user.js',
+  supportURL: 'https://github.com/momocow/OGame-Discoverer-Kit/issues',
   'run-at': 'document-body',
   require: [
     'https://cdn.jsdelivr.net/npm/vue@2.6.11',
