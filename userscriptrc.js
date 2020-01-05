@@ -19,6 +19,10 @@ module.exports = {
     'GM_setValue',
     'GM_getValue',
     'GM_deleteValue',
-    'GM_addValueChangeListener'
+    'GM_addValueChangeListener',
+    'GM_xmlhttpRequest'
+  ],
+  connect: [
+    'api.inazuma.love'
   ]
 }
