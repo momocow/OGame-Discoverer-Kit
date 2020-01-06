@@ -17,5 +17,8 @@
         "GM_deleteValue": "readonly",
         "GM_addValueChangeListener": "readonly",
         "GM_xmlhttpRequest": "readonly"
+    },
+    "parserOptions": {
+        "parser": "babel-eslint"
     }
 }

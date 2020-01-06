@@ -28,6 +28,11 @@ const COMMON_CONFIG = {
         resourceQuery: /blockType=i18n/,
         type: 'javascript/auto',
         loader: '@kazupon/vue-i18n-loader'
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       }
     ]
   }
