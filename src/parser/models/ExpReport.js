@@ -1,5 +1,5 @@
 import { ValueError } from '../errors'
-import { PROFIT_TYPE, EVENT_TYPE, REPORT_TYPE } from '../enums'
+import { PROFIT_TYPE, EVENT_TYPE, REPORT_TYPE } from '../encode'
 import { Report } from './Report'
 
 export class ExpReport extends Report {

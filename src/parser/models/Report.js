@@ -1,4 +1,4 @@
-import { REPORT_TYPE } from '../enums'
+import { REPORT_TYPE } from '../encode'
 import { ValueError } from '../errors'
 
 export class Report {

@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import KEYWORDS from './keywords'
 import { ExpReport } from './models/ExpReport'
-import { EVENT_TYPE, PROFIT_TYPE } from './enums'
+import { EVENT_TYPE, PROFIT_TYPE } from './encode'
 
 export function * parseExpReports (text, locale, timezone, skip = new Set()) {
   for (const r of $(text).find('li.msg').toArray()) {
