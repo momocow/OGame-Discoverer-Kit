@@ -1,13 +1,11 @@
 export class ParserError extends Error {
-  constructor (...args) {
-    super(...args)
-    this.name = 'ParserError'
-  }
+  name = 'ParserError'
+}
+
+export class InvalidData extends ParserError {
+  name = 'InvalidData'
 }
 
 export class ValueError extends ParserError {
-  constructor (...args) {
-    super(...args)
-    this.name = 'ValueError'
-  }
+  name = 'ValueError'
 }

@@ -4,7 +4,7 @@
 
 ### Event
 ```
-0 = unknown
+0 = undefined
 1 = boring
 2 = resource profit
 3 = ship profit
@@ -12,4 +12,5 @@
 5 = flight accelerated
 6 = flight delayed
 7 = fleet sacrificed
+8 = trader found
 ```

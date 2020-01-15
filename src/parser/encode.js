@@ -1,36 +1,58 @@
 import { bimap } from './utils'
 
-export const resourceType = bimap({
-  UNDEFINED: 0,
-  METAL: 1,
-  CRYSTAL: 2,
-  DEUTERIUM: 3
+export const Resource = bimap({
+  undefined: 0,
+  metal: 1,
+  crystal: 2,
+  deuterium: 3,
+  darkmatter: 4
 })
 
-export const reportType = {
-  UNDEFINED: 0,
-  EXPEDITION: 1
+export const Ship = {
+  smallcargo: 202,
+  largecargo: 203,
+  lightfighter: 204,
+  heavyfighter: 205,
+  cruiser: 206,
+  battleship: 207,
+  espionageprobe: 210,
+  bomber: 211,
+  destroyer: 213,
+  battlecruiser: 215,
+  reaper: 218,
+  pathfinder: 219
 }
 
-export const eventType = {
+export const ReportType = bimap({
+  undefined: 0,
+  expedition: 1
+})
 
-}
+export const ItemLevel = bimap({
+  undefined: 0,
+  gold: 1,
+  silver: 2,
+  bronze: 3
+})
 
-0 = unknown
-1 = boring
-2 = resource profit
-3 = ship profit
-4 = item profit
-5 = flight accelerated
-6 = flight delayed
-7 = fleet sacrificed
+export const ItemType = bimap({
+  undefined: 0,
+  metalbooster: 1,
+  crystalbooster: 2,
+  deuteriumbooster: 3,
+  kraken: 4,
+  newtron: 5,
+  detroid: 6
+})
 
-// export const EVENT_TYPE = {
-//   PROFIT: 'p',
-//   UNDEFINED: ''
-// }
-
-// export const PROFIT_TYPE = {
-//   RESOURCES: 'r',
-//   FLEETS: 'f'
-// }
+export const EventType = bimap({
+  undefined: 0,
+  boring: 1,
+  rsrcprofit: 2,
+  shipprofit: 3,
+  itemprofit: 4,
+  flightaccel: 5,
+  flightdelay: 6,
+  fleetsacrif: 7,
+  traderfound: 8
+})

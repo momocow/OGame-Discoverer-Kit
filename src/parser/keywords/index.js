@@ -1,5 +1,5 @@
-import ZH_TW from './zh-TW.json'
+import * as zhTW from './zh-TW'
 
 export default {
-  'zh-TW': ZH_TW
+  'zh-TW': zhTW
 }
