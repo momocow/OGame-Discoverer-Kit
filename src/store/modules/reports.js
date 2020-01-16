@@ -1,6 +1,6 @@
 import rootLogger from '@/logger'
 import { universe, language, playerId } from '@/env'
-import { REPORT_TYPE } from '@/parser/encode'
+import { REPORT_TYPE } from '@/parser/data/v2/encode'
 
 const logger = rootLogger.namespace('store/reports')
 

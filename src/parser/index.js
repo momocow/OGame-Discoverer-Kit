@@ -1,71 +1,128 @@
 import { DateTime } from 'luxon'
-import KEYWORDS from './keywords'
-import { ExpReport } from './models/ExpReport'
-import { EVENT_TYPE, PROFIT_TYPE } from './encode'
+import { EventEmitter } from 'events'
 
-export function * parseExpReports (text, locale, timezone, skip = new Set()) {
-  for (const r of $(text).find('li.msg').toArray()) {
-    const localeKeywords = KEYWORDS[locale]
-    const $report = $(r)
-    const msgId = $report.data('msg-id')
+import KEYWORDS from './data/v2/keywords'
+import { ExpeditionReport } from './data/v2/adapter'
 
-    if (skip.has(msgId)) { continue }
+export class ParserError extends Error {
+  name = 'ParserError'
+  constructor (messageId, ...args) {
+    super(...args)
+    this.messageId = messageId
+  }
+}
 
-    const report = new ExpReport(msgId)
+export class ConstructError extends ParserError {
+  name = 'ConstructError'
+  constructor (messageId, error) {
+    super(messageId, error.message)
+    this.origin = error
+  }
+}
 
-    report.time = DateTime.fromFormat(
-      $report.find('.msg_date').text(),
-      'dd.MM.yyyy HH:mm:ss',
-      { zone: timezone }
-    ).toMillis()
+export class AnalysisError extends ParserError {
+  name = 'AnalysisError'
+  constructor (report, error) {
+    super(report.id, error.message)
+    this.origin = error
+    this.report = report
+  }
+}
 
-    let profitsComplete = false
-    let profits
-    for (const line of $report.find('.msg_content').html().split(/<br(?:| \/)>/)) {
-      if (!report.eventType && !report.profitType) {
-        if (line.includes(localeKeywords.resourcesProfit)) {
-          report.eventType = EVENT_TYPE.PROFIT
-          report.profitType = PROFIT_TYPE.RESOURCES
-        } else if (line.includes(localeKeywords.fleetsProfit)) {
-          report.eventType = EVENT_TYPE.PROFIT
-          report.profitType = PROFIT_TYPE.FLEETS
-        }
+export class ParserConfirm {
+  value = true
+  reject () {
+    this.value = false
+  }
+}
+
+export class Parser extends EventEmitter {
+  constructor (locale, timezone) {
+    super()
+    this.locale = locale
+    this.timezone = timezone
+    this.keywords = KEYWORDS[locale]
+  }
+
+  parse (text) {
+    for (const r of $(text).find('li.msg').toArray()) {
+      const $report = $(r)
+      const messageId = $report.data('msg-id')
+
+      // confirm phase
+      const confirm = new ParserConfirm()
+      if (this.emit('confirm', confirm, messageId) && !confirm.value) {
+        continue
       }
 
-      if (!profitsComplete) {
-        if (report.profitType === PROFIT_TYPE.RESOURCES) {
-          for (const [resourceKey, resourceName] of Object.entries(localeKeywords.resources)) {
-            const tokens = line.split(' ')
-            const resourceNameLineIndex = tokens.indexOf(resourceName)
-            if (resourceNameLineIndex >= 0) {
-              profits = {
-                [resourceKey]: Number(tokens[resourceNameLineIndex + 1].replace(/,/g, ''))
-              }
-              profitsComplete = true
-              break
-            }
-          }
-        } else if (report.profitType === PROFIT_TYPE.FLEETS) {
-          if (!line) {
-            profitsComplete = true
-          } else {
-            for (const [fleetKey, fleetName] of Object.entries(localeKeywords.fleets)) {
-              const tokens = line.split(':')
-              if (tokens[0] === fleetName) {
-                if (!profits) {
-                  profits = {}
+      // construct phase
+      let report = null
+      try {
+        report = new ExpeditionReport()
+        report.id = messageId
+      } catch (error) {
+        this.emit('error', new ConstructError(messageId, error))
+        continue
+      }
+
+      // analysis phase
+      try {
+        report.time = DateTime.fromFormat(
+          $report.find('.msg_date').text(),
+          'dd.MM.yyyy HH:mm:ss',
+          { zone: this.timezone }
+        ).toMillis()
+
+        const c = $report.find('.msg_content').html()
+          .replace(/<br(?: \/)?>/g, '\n')
+        const content = $(c).text()
+        for (const pattern of this.keywords.patterns) {
+          if (pattern.test.test(content)) {
+            report.event = pattern.event
+            switch (pattern.event) {
+              case 'Ship':
+                for (const [, k, v] of content.matchAll(pattern.reduce)) {
+                  if (k in this.keywords.ship) {
+                    const shipId = this.keywords.ship[k]
+                    const amount = Number(v.replace(/,/g, ''))
+                    report.setProfit(shipId, amount)
+                  }
                 }
-                profits[fleetKey] = Number(tokens[1].trim())
+                break
+              case 'Resource': {
+                const matched = content.match(pattern.reduce)
+                if (
+                  matched &&
+                  matched.length > 3 &&
+                  matched[1] in this.keywords.resource
+                ) {
+                  const resourceId = this.keywords.resource[matched[1]]
+                  const amount = Number(matched[2].replace(/,/g, ''))
+                  report.setProfit(resourceId, amount)
+                }
+                break
+              }
+              case 'Item': {
+                const matched = content.match(pattern.reduce)
+                if (
+                  matched &&
+                  matched.length > 2 &&
+                  matched[1] in this.keywords.item
+                ) {
+                  report.item = this.keywords.item[matched[1]]
+                }
                 break
               }
             }
+            break
           }
         }
+        report.validate()
+        this.emit('parse', report)
+      } catch (err) {
+        this.emit('error', new AnalysisError(report, err))
+        continue
       }
     }
-    if (profits) {
-      report.profits = profits
-    }
-    yield report
   }
 }

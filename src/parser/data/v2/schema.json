@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "report data schema",
+  "type": "object",
+  "properties": {
+    "i": {
+      "description": "id",
+      "type": "integer",
+      "minimum": 0
+    },
+    "t": {
+      "description": "time",
+      "type": "integer",
+      "minimum": 0
+    },
+    "e": {
+      "description": "event",
+      "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    },
+    "p": {
+      "description": "profits",
+      "type": "object",
+      "patternProperties": {
+        "^\\d+$": {
+          "description": "number of ship or resource profits",
+          "type":"integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "m": {
+      "description": "item id",
+      "enum": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15, 16, 17, 18
+      ]
+    }
+  },
+  "required": ["i", "t", "e"],
+  "anyOf": [
+    {
+      "properties": {
+        "e": { "const": 2 },
+        "p": {
+          "propertyNames": {
+            "enum": ["1", "2", "3", "4"]
+          }
+        }
+      },
+      "required": ["p"],
+      "not": { "required": ["m"] }
+    },
+    {
+      "properties": {
+        "e": { "const": 3 },
+        "p": {
+          "propertyNames": {
+            "enum": [
+              "202", "203", "204", "205", "206", "207",
+              "210", "211", "213", "215", "218", "219"
+            ]
+          }
+        }
+      },
+      "required": ["p"],
+      "not": { "required": ["m"] }
+    },
+    {
+      "properties": {
+        "e": { "const": 4 }
+      },
+      "required": ["m"],
+      "not": { "required": ["p"] }
+    },
+    {
+      "properties": {
+        "e": {
+          "enum": [1, 5, 6, 7, 8, 9]
+        }
+      },
+      "not": {
+        "required": ["m", "p"]
+      }
+    }
+  ]
+}

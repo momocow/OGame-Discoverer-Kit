@@ -16,6 +16,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
     "@kazupon/vue-i18n-loader": "^0.4.1",
+    "ajv": "^6.10.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.0",

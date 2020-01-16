@@ -1,2 +1,4 @@
 import { Logger } from './utils/logger'
-export default new Logger('OGDK')
+const logger = new Logger('OGDK')
+logger.setLevel(Logger.INFO)
+export default logger

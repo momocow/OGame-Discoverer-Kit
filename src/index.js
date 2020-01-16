@@ -1,8 +1,13 @@
-import store from './store'
+// import store from './store'
 import router from './router'
+import menuItems from './menu'
 
-(async function () {
+(function () {
   // window.addEventListener('beforeunload', () => store.dispatch('settings/save'))
   // store.dispatch('settings/load')
-  // $(router(new URL(location.href)))
+  for (const cmd in menuItems) {
+    GM_registerMenuCommand(cmd, menuItems[cmd])
+  }
+
+  $(router(new URL(location.href)))
 })()

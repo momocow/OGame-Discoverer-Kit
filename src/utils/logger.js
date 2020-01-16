@@ -1,16 +1,3 @@
-const LEVELS = {
-  ALL: 0,
-  DEBUG: 1,
-  INFO: 2,
-  WARNING: 3,
-  ERROR: 4,
-  OFF: Infinity
-}
-
-function defineLevel (name, value) {
-  LEVELS[name] = value
-}
-
 class LogEntry {
   constructor (level, msg, args, time = new Date()) {
     this.level = level
@@ -31,6 +18,21 @@ class LogEntry {
  * Logger class
  */
 class Logger {
+  static LEVELS = {
+    ALL: 0,
+    DEBUG: 1,
+    INFO: 2,
+    WARNING: 3,
+    ERROR: 4,
+    OFF: Infinity
+  }
+
+  static loggers = {}
+
+  static defineLevel (name, value) {
+    Logger.LEVELS[name] = value
+  }
+
   /**
    * @param {string} name
    * @param {LoggerOptions} options
@@ -89,9 +91,10 @@ class Logger {
 
   _log (msgLevel, msg, ...args) {
     const entry = new LogEntry(msgLevel, msg, args)
-    if (msgLevel >= this._level) {
-      this.save(entry)
-    }
+
+    if (msgLevel < this._level) return
+
+    this.save(entry)
 
     const tpl = (this.logo ? this.logo + ' ' : '') + '%c %s %c [%s] %s%c' + entry.message
     const namespacePrefix = this._nsp ? this._nsp + ': ' : ''
@@ -105,16 +108,16 @@ class Logger {
       namespacePrefix
     ]
     switch (msgLevel) {
-      case LEVELS.DEBUG:
+      case Logger.LEVELS.DEBUG:
         console.debug(...loggerArgs, 'color:grey', ...entry.args)
         break
-      case LEVELS.INFO:
+      case Logger.LEVELS.INFO:
         console.info(...loggerArgs, 'color:black', ...entry.args)
         break
-      case LEVELS.WARNING:
+      case Logger.LEVELS.WARNING:
         console.warn(...loggerArgs, 'color:yellow', ...entry.args)
         break
-      case LEVELS.ERROR:
+      case Logger.LEVELS.ERROR:
         console.error(...loggerArgs, 'color:red', ...entry.args)
         break
       default:
@@ -123,34 +126,41 @@ class Logger {
   }
 
   debug (msg, ...args) {
-    return this._log(LEVELS.DEBUG, msg, ...args)
+    return this._log(Logger.LEVELS.DEBUG, msg, ...args)
   }
 
   info (msg, ...args) {
-    return this._log(LEVELS.INFO, msg, ...args)
+    return this._log(Logger.LEVELS.INFO, msg, ...args)
   }
 
   warn (msg, ...args) {
-    return this._log(LEVELS.WARNING, msg, ...args)
+    return this._log(Logger.LEVELS.WARNING, msg, ...args)
   }
 
   error (msg, ...args) {
-    return this._log(LEVELS.ERROR, msg, ...args)
+    return this._log(Logger.LEVELS.ERROR, msg, ...args)
   }
 
-  setLevel (level = LEVELS.INFO) {
+  setLevel (level = Logger.LEVELS.INFO) {
     if (typeof level === 'string') {
-      this._level = LEVELS[level.toUpperCase()]
+      const levelUpper = level.toUpperCase()
+      if (levelUpper in Logger.LEVELS) {
+        this._level = Logger.LEVELS[levelUpper]
+      }
       return this._level
-    } else if (typeof level === 'number' && Object.values(LEVELS).includes(level)) {
+    } else if (typeof level === 'number' && Object.values(Logger.LEVELS).includes(level)) {
       this._level = level
       return this._level
     }
     throw new Error('invalid log level')
   }
 
+  get levelNo () {
+    return this._level
+  }
+
   get level () {
-    for (const [lvl, val] of Object.entries(LEVELS)) {
+    for (const [lvl, val] of Object.entries(Logger.LEVELS)) {
       if (val === this._level) {
         return lvl
       }
@@ -162,10 +172,6 @@ class Logger {
     this.setLevel(val)
   }
 }
-
-Logger.LEVELS = LEVELS
-Logger.defineLevel = defineLevel
-Logger.loggers = {}
 
 module.exports = {
   Logger
