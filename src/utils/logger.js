@@ -1,4 +1,4 @@
-class LogEntry {
+export class LogEntry {
   constructor (level, msg, args, time = new Date()) {
     this.level = level
     this.message = msg
@@ -17,7 +17,7 @@ class LogEntry {
  *//**
  * Logger class
  */
-class Logger {
+export class Logger {
   static LEVELS = {
     ALL: 0,
     DEBUG: 1,
@@ -171,8 +171,4 @@ class Logger {
   set level (val) {
     this.setLevel(val)
   }
-}
-
-module.exports = {
-  Logger
 }

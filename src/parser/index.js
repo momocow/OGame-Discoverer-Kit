@@ -29,10 +29,29 @@ export class AnalysisError extends ParserError {
   }
 }
 
-export class ParserConfirm {
-  value = true
-  reject () {
-    this.value = false
+export class SkipIteration extends Error {
+  name = 'SkipIteration'
+}
+
+export class Decision {
+  constructor (messageId) {
+    this.messageId = messageId
+    this._inner = new Promise((resolve, reject) => {
+      this._resolve = resolve
+      this._reject = reject
+    })
+  }
+
+  continue () {
+    this._resolve()
+  }
+
+  skip () {
+    this._reject(new SkipIteration())
+  }
+
+  async wait () {
+    return this._inner
   }
 }
 
@@ -44,14 +63,18 @@ export class Parser extends EventEmitter {
     this.keywords = KEYWORDS[locale]
   }
 
-  parse (text) {
+  async parse (text) {
     for (const r of $(text).find('li.msg').toArray()) {
       const $report = $(r)
       const messageId = $report.data('msg-id')
 
       // confirm phase
-      const confirm = new ParserConfirm()
-      if (this.emit('confirm', confirm, messageId) && !confirm.value) {
+      const decision = new Decision(messageId)
+      this.emit('beforeparse', decision)
+      try {
+        await decision.wait()
+      } catch (e) {
+        // skip iteration
         continue
       }
 

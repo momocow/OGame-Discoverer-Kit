@@ -1,7 +1,10 @@
+import { ENTER, EXIT } from './context'
+import { entryReducer } from './fp'
+
 export class GMRequestAborted extends Error {
+  name = 'GMRequestAborted'
   constructor () {
     super('request aborted')
-    this.name = 'GMRequestAborted'
   }
 }
 
@@ -49,4 +52,27 @@ export async function request (options = {}) {
       }
     })
   })
+}
+
+export class GMTabStorage {
+  constructor (store = {}) {
+    this._defaultStore = store
+  }
+
+  async [ENTER] () {
+    return new Promise(resolve => {
+      GM_getTab(tab => resolve(
+        Object.entries(this._defaultStore)
+          .filter(([k]) => !(k in tab)) // find missings
+          .reduce(entryReducer, tab) // apply default values
+      ))
+    })
+  }
+
+  [EXIT] (error, tab) {
+    if (!error) {
+      // save if no error
+      GM_saveTab(tab)
+    }
+  }
 }

@@ -87,6 +87,6 @@ module.exports = [
   }
 ]
 
-if (DEV) {
-  module.exports.push(DEV_CONFIG)
-}
+// if (DEV) {
+//   module.exports.push(DEV_CONFIG)
+// }
