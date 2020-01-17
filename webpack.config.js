@@ -4,6 +4,7 @@ const WebpackUserscript = require('webpack-userscript')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 const DEV = process.env.WEBPACK_DEV_SERVER === 'true'
+const UI_DEV = !!process.env.UI_DEV
 
 const COMMON_CONFIG = {
   resolve: {
@@ -38,7 +39,7 @@ const COMMON_CONFIG = {
   }
 }
 
-const DEV_CONFIG = {
+const UI_DEV_CONFIG = {
   ...COMMON_CONFIG,
   mode: 'development',
   entry: path.resolve(__dirname, 'dev', 'index.js'),
@@ -87,6 +88,6 @@ module.exports = [
   }
 ]
 
-// if (DEV) {
-//   module.exports.push(DEV_CONFIG)
-// }
+if (UI_DEV) {
+  module.exports.push(UI_DEV_CONFIG)
+}

@@ -3,8 +3,10 @@ import { using } from './utils/context'
 import { GMTabStorage } from './utils/gm'
 import logger from './logger'
 
+export const CMD_TOGGLE_LOG_VERBOSITY = 'Toggle log verbosity on the current tab 📝'
+
 export default {
-  async 'Toggle log verbosity on the current tab 📝' () {
+  async [CMD_TOGGLE_LOG_VERBOSITY] () {
     const { WARNING, DEBUG } = Logger.LEVELS
     await using(
       new GMTabStorage({ logLevel: WARNING }),
