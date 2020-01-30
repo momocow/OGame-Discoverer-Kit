@@ -26,8 +26,5 @@ module.exports = {
     'GM_addValueChangeListener',
     'GM_xmlhttpRequest',
     'GM_registerMenuCommand'
-  ],
-  connect: [
-    'api.inazuma.love'
   ]
 }
