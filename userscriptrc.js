@@ -14,7 +14,7 @@ module.exports = {
     'https://unpkg.com/vue-i18n@8.15.3/dist/vue-i18n.min.js',
     'https://unpkg.com/vuex@3.1.2/dist/vuex.min.js',
     'https://cdn.jsdelivr.net/npm/ajv@6.10.2/dist/ajv.min.js',
-    'https://cdn.jsdelivr.net/npm/immer@5.3.2/dist/immer.umd.js'
+    'https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js'
   ],
   grant: [
     'unsafeWindow',

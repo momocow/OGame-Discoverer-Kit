@@ -5,11 +5,11 @@
     ],
     "globals": {
         "$": "readonly",
+        "_": "readonly",
         "Ajv": "readonly",
         "Vue": "readonly",
         "Vuex": "readonly",
         "VueI18n": "readonly",
-        "immer": "readonly",
         "GM_getTab": "readonly",
         "GM_saveTab": "readonly",
         "unsafeWindow": "readonly",
