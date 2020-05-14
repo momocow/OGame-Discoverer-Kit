@@ -1,0 +1,15 @@
+{
+  "name": "@momocow/ogame-models",
+  "version": "0.1.0",
+  "description": "A collection of OGame data models.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "ogame",
+    "data",
+    "model"
+  ],
+  "author": "MomoCow",
+  "license": "MIT"
+}
