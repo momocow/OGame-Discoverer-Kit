@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/momocow/OGame-Discoverer-Kit#readme",
   "devDependencies": {
+    "@types/jest": "^25.2.3",
     "@types/jquery": "^3.3.38",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "eslint": "^6.8.0",
@@ -30,6 +31,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.0.0",
     "typescript": "^3.9.2"
   }
 }
