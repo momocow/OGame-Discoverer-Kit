@@ -1,0 +1,35 @@
+{
+  "name": "@momocow/ogame-discoverer-kit",
+  "version": "0.1.0",
+  "description": "Everything a discoverer must have at hand",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momocow/OGame-Discoverer-Kit.git"
+  },
+  "keywords": [
+    "ogame",
+    "userscript"
+  ],
+  "author": "MomoCow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/momocow/OGame-Discoverer-Kit/issues"
+  },
+  "homepage": "https://github.com/momocow/OGame-Discoverer-Kit#readme",
+  "devDependencies": {
+    "@types/jquery": "^3.3.38",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard-with-typescript": "^16.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "typescript": "^3.9.2"
+  }
+}
