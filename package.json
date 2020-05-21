@@ -10,7 +10,8 @@
     "commit": "gitmoji -c",
     "lint": "eslint --ext .ts,.tsx packages src",
     "lint:fix": "eslint --fix packages src",
-    "dev": "webpack-dev-server"
+    "dev": "shx mkdir -p .dev && webpack-dev-server",
+    "eject": "shx rm -r .dev/*"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "gitmoji-cli": "^3.2.4",
     "jest": "^26.0.1",
+    "shx": "^0.3.2",
     "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.3",
