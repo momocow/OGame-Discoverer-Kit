@@ -47,5 +47,9 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "webpack-userscript": "^2.5.3"
+  },
+  "dependencies": {
+    "@momocow/gm-api": "file:packages/gm-api",
+    "@momocow/ogame-models": "file:packages/ogame-models"
   }
 }

@@ -1,18 +1,15 @@
 {
-    "compilerOptions": {
-        "jsx": "preserve",
-        "target": "esnext",
-        "module": "esnext",
-        "strict": true,
-        "baseUrl": ".",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "outDir": "dist",
-        "sourceMap": true
-    },
-    "include": [
-        "src",
-        "packages"
-    ]
+  "compilerOptions": {
+    "jsx": "preserve",
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["src", "packages"]
 }
