@@ -8,14 +8,10 @@ const SRC_PATH = path.resolve(__dirname, 'src')
 const DIST_PATH = path.resolve(__dirname, DEV_MODE ? '.dev/dist' : 'dist')
 const USERSCRIPT_RC_PATH = path.resolve(__dirname, 'userscriptrc.js')
 
-module.exports = {
+const COMMON_CONFIG = {
+  target: 'web',
   entry: './src/index.ts',
-  mode: DEV_MODE ? 'development' : 'production',
-  devtool: DEV_MODE ? 'inline-source-map' : undefined,
-  output: {
-    path: DIST_PATH,
-    filename: 'ogame-discoverer-kit.user.js'
-  },
+  output: { path: DIST_PATH },
   module: {
     rules: [
       {
@@ -37,5 +33,24 @@ module.exports = {
     })
   ]
 }
+
+const DEV_CONFIG = Object.assign({}, COMMON_CONFIG, {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  output: {
+    ...COMMON_CONFIG.output,
+    filename: 'ogdk-dev.user.js'
+  }
+})
+
+const PROD_CONFIG = Object.assign({}, COMMON_CONFIG, {
+  mode: 'production',
+  output: {
+    ...COMMON_CONFIG.output,
+    filename: 'ogdk.user.js'
+  }
+})
+
+module.exports = [DEV_CONFIG, PROD_CONFIG]
 
 console.log('webpack.config.js', module.exports)

@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
+        "jsx": "preserve",
+        "target": "esnext",
+        "module": "esnext",
         "strict": true,
         "baseUrl": ".",
-        "target": "esnext",
-        "module": "es2015",
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
