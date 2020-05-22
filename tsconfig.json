@@ -9,7 +9,12 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "typeRoots": [
+      "src/@types",
+      "packages/@types",
+      "node_modules/@types"
+    ]
   },
   "include": ["src", "packages"]
 }
