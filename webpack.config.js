@@ -40,6 +40,11 @@ const DEV_CONFIG = Object.assign({}, COMMON_CONFIG, {
   output: {
     ...COMMON_CONFIG.output,
     filename: 'ogdk-dev.user.js'
+  },
+  devServer: {
+    hot: false,
+    liveReload: false,
+    inline: false
   }
 })
 
@@ -51,6 +56,10 @@ const PROD_CONFIG = Object.assign({}, COMMON_CONFIG, {
   }
 })
 
-module.exports = [DEV_CONFIG, PROD_CONFIG]
+if (DEV_MODE) {
+  module.exports = DEV_CONFIG
+} else {
+  module.exports = [DEV_CONFIG, PROD_CONFIG]
+}
 
 console.log('webpack.config.js', module.exports)

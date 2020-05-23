@@ -1,5 +1,7 @@
 import { Model } from './base'
-import { ModelError } from './errors'
+import { ModelError } from '../errors'
+
+import { Numeral } from '../utils'
 
 export class Page extends Model {
   constructor () {
@@ -20,8 +22,7 @@ export class GamePage extends Page {
     if (serverMatched === null) {
       throw new ModelError('failed to extract server from hostname')
     }
-    this._data.server = serverMatched[0]
-    this._data.universe = serverMatched[1]
+    this._data.server = serverMatched[1]
     this._data.country = serverMatched[2]
   }
 
@@ -29,21 +30,20 @@ export class GamePage extends Page {
     return this._data.server
   }
 
-  public get universe (): string {
-    return this._data.universe
-  }
-
   public get country (): string {
     return this._data.country
   }
 
-  public get metals (): int {
+  public get metals (): Numeral {
+    return Numeral.parse($('#resources_metal').text())
   }
 
-  public get crystals (): int {
+  public get crystals (): Numeral {
+    return Numeral.parse($('#resources_crystal').text())
   }
 
-  public get deteriums (): int {
+  public get deteriums (): Numeral {
+    return Numeral.parse($('#resources_deuterium').text())
   }
 
   public toJSON (): Record<string, any> {

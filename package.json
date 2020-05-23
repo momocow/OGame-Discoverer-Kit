@@ -50,7 +50,6 @@
     "webpack-userscript": "^2.5.3"
   },
   "dependencies": {
-    "@momocow/gm-api": "file:packages/gm-api",
-    "@momocow/ogame-models": "file:packages/ogame-models"
+    "@momocow/ogame-sdk": "file:packages/ogame-sdk"
   }
 }
