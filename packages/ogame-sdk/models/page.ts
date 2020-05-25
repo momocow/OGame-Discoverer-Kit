@@ -1,7 +1,6 @@
+import { $serverTime } from '../globals'
+import { Numeral, ExternalValue } from '../utils'
 import { Model } from './base'
-import { ModelError } from '../errors'
-
-import { Numeral } from '../utils'
 
 export class Page extends Model {
   constructor () {
@@ -15,15 +14,38 @@ export class Page extends Model {
 }
 
 export class GamePage extends Page {
+  public static serverSlug = new ExternalValue<[string, string]>(
+    (url: URL) => {
+      const serverMatched = url.hostname.match(/(s\d+)-([a-z]+)/)
+      if (serverMatched === null || serverMatched.length < 3) {
+        throw new Error('failed to extract server from hostname')
+      }
+      const [, server, country] = serverMatched
+      return [server, country]
+    },
+    'url.serverSlug'
+  )
+
+  public static metals = new ExternalValue<Numeral>(
+    () => Numeral.parse($('#resources_metal').text()),
+    'dom.metals'
+  )
+
+  public static crystals = new ExternalValue<Numeral>(
+    () => Numeral.parse($('#resources_crystal').text()),
+    'dom.crystals'
+  )
+
+  public static deteriums = new ExternalValue<Numeral>(
+    () => Numeral.parse($('#resources_deuterium').text()),
+    'dom.deteriums'
+  )
+
   constructor () {
     super()
-
-    const serverMatched = this.url.hostname.match(/(s\d+)-([a-z]+)/)
-    if (serverMatched === null) {
-      throw new ModelError('failed to extract server from hostname')
-    }
-    this._data.server = serverMatched[1]
-    this._data.country = serverMatched[2]
+    const [server, country] = GamePage.serverSlug.get(undefined, this.url)
+    this._data.server = server
+    this._data.country = country
   }
 
   public get server (): string {
@@ -34,16 +56,20 @@ export class GamePage extends Page {
     return this._data.country
   }
 
+  public get serverTime (): Date {
+    return $serverTime.get()
+  }
+
   public get metals (): Numeral {
-    return Numeral.parse($('#resources_metal').text())
+    return GamePage.metals.get()
   }
 
   public get crystals (): Numeral {
-    return Numeral.parse($('#resources_crystal').text())
+    return GamePage.crystals.get()
   }
 
   public get deteriums (): Numeral {
-    return Numeral.parse($('#resources_deuterium').text())
+    return GamePage.deteriums.get()
   }
 
   public toJSON (): Record<string, any> {

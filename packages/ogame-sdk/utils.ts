@@ -1,4 +1,31 @@
 import _ from 'lodash'
+import { ExternalValueError } from './errors'
+
+export class ExternalValue<T> {
+  public name: string = '<anonymous>'
+
+  constructor (
+    public getter: (...args: any[]) => T,
+    name?: string
+  ) {
+    if (typeof name !== 'undefined') {
+      this.name = name
+    } else if (getter.name.length > 0) {
+      this.name = getter.name
+    }
+  }
+
+  public get (defaultValue?: T, ...args: any[]): T {
+    try {
+      return this.getter(...args)
+    } catch (e) {
+      if (typeof defaultValue !== 'undefined') {
+        return defaultValue
+      }
+      throw new ExternalValueError(this.name, e.message)
+    }
+  }
+}
 
 export interface NumeralFormatOptions {
   fragment: number
