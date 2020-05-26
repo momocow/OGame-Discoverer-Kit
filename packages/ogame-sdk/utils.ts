@@ -3,6 +3,7 @@ import { ExternalValueError } from './errors'
 
 export class ExternalValue<T> {
   public name: string = '<anonymous>'
+  public value?: T
 
   constructor (
     public getter: (...args: any[]) => T,
@@ -10,20 +11,27 @@ export class ExternalValue<T> {
   ) {
     if (typeof name !== 'undefined') {
       this.name = name
-    } else if (getter.name.length > 0) {
+    } else {
       this.name = getter.name
     }
   }
 
-  public get (defaultValue?: T, ...args: any[]): T {
-    try {
-      return this.getter(...args)
-    } catch (e) {
-      if (typeof defaultValue !== 'undefined') {
-        return defaultValue
+  public get (defaultValue?: T, cache: boolean = true): T {
+    if (!cache || typeof this.value === 'undefined') {
+      try {
+        this.value = this.getter()
+      } catch (e) {
+        if (typeof defaultValue !== 'undefined') {
+          return defaultValue
+        }
+        throw new ExternalValueError(this.name, e.message)
       }
-      throw new ExternalValueError(this.name, e.message)
     }
+    return this.value
+  }
+
+  public clear (): void {
+    this.value = undefined
   }
 }
 
