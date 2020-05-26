@@ -18,11 +18,12 @@
 - `npm run dev`
   啟動測試伺服器 (`webpack-dev-server`)。
 
-  可於瀏覽器開啟以下連結取得即時構建的腳本，`wds_port` 為 `webpack-dev-server` 所監聽的埠。
-  - `http://localhost:<wds_port>/.dev/dist/ogdk.user.js`
-  - `http://localhost:<wds_port>/.dev/dist/ogdk.meta.js`
-  - `http://localhost:<wds_port>/.dev/dist/ogdk-dev.user.js`
-  - `http://localhost:<wds_port>/.dev/dist/ogdk-dev.meta.js`
+  可於瀏覽器開啟以下連結取得即時構建的腳本，`wds_port` 為 `webpack-dev-server` 所監聽的埠，
+  `publicPath` 為 `output.publicPath` 或 `devServer.publicPath` 的設定值。
+  - `http://localhost:<wds_port>/<publicPath>/ogdk.user.js`
+  - `http://localhost:<wds_port>/<publicPath>/ogdk.meta.js`
+  - `http://localhost:<wds_port>/<publicPath>/ogdk-dev.user.js`
+  - `http://localhost:<wds_port>/<publicPath>/ogdk-dev.meta.js`
 
 - `npm run build`
   構建腳本，輸出目錄依據環境變數 `NODE_ENV` 決定。
