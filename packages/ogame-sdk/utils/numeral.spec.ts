@@ -3,8 +3,7 @@
  */
 // @See https://github.com/facebook/jest/issues/10087
 // import { describe, expect, it } from '@jest/globals'
-import { Numeral, ExternalValue } from './utils'
-import { ExternalValueError } from './utils/errors'
+import { Numeral } from './numeral'
 
 describe('Numeral', () => {
   it('is an instance of Number', () => {
@@ -57,36 +56,5 @@ describe('Numeral', () => {
     const divider = { valueOf: () => -4 }
     expect(n.divide(divider).valueOf()).toEqual(-0.5)
     expect(Numeral.divide(n, divider).valueOf()).toEqual(-0.5)
-  })
-})
-
-describe('ExternalValue', () => {
-  it('defaults to the name of its getter', () => {
-    const ev = new ExternalValue(function test1 () { return 1 })
-    expect(ev.name).toBe('test1')
-  })
-
-  it('can specify a name', () => {
-    const ev = new ExternalValue(function test1 () { return 1 }, 'test2')
-    expect(ev.name).toBe('test2')
-  })
-
-  it('can cache and get a value', () => {
-    let count = 1
-    const ev = new ExternalValue(function test1 () { return count++ })
-    expect(ev.get()).toBe(1)
-    expect(ev.get(undefined, false)).toBe(2)
-  })
-
-  it('can get with default value on errors', () => {
-    class MyError extends Error {}
-    const ev = new ExternalValue<number>(function test1 () {
-      throw new MyError('my error')
-    })
-
-    expect(() => ev.get()).toThrow(ExternalValueError)
-    // ExternalValueError has the same message as MyError
-    expect(() => ev.get()).toThrow('my error')
-    expect(ev.get(1)).toBe(1)
   })
 })
