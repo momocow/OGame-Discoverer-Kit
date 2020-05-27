@@ -4,7 +4,7 @@
 // @See https://github.com/facebook/jest/issues/10087
 // import { describe, expect, it } from '@jest/globals'
 import { Numeral, ExternalValue } from './utils'
-import { ExternalValueError } from './errors'
+import { ExternalValueError } from './utils/errors'
 
 describe('Numeral', () => {
   it('is an instance of Number', () => {

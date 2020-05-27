@@ -1,2 +1,2 @@
-export * from './errors'
+export * from './utils/errors'
 export * from './models/page'
