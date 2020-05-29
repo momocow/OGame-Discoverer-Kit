@@ -26,3 +26,11 @@ export function $parseInt (str: string, radix?: number): number {
   }
   return n
 }
+
+export function $parseFloat (str: string): number {
+  const n = parseFloat(str)
+  if (Number.isNaN(n)) {
+    throw new StrictError([str], '$parseInt: NaN')
+  }
+  return n
+}

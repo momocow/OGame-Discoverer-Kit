@@ -1,7 +1,9 @@
 import { Numeral } from '@/utils/numeral'
-import { $$, $parseInt } from '@/utils/strict'
+import { $$, $parseInt, $parseFloat } from '@/utils/strict'
 
 import { SemVer } from 'semver'
+
+import { Coordinate } from './location'
 
 declare global {
   const serverTime: Date
@@ -16,7 +18,7 @@ export class GamePage extends Page {
   public readonly version: SemVer
   public readonly timestamp: number
   public readonly universe: string
-  public readonly server: string
+  public readonly serverId: string
   public readonly region: string
   public readonly language: string
   public readonly universeName: string
@@ -28,7 +30,11 @@ export class GamePage extends Page {
   public readonly playerName: string
   public readonly planetId: string
   public readonly planetName: string
-
+  public readonly planetCoordinates: Coordinate
+  public readonly planetType: 'planet' | 'moon'
+  public readonly allianceId: string
+  public readonly allianceName: string
+  public readonly allianceTag: string
 
 
   constructor () {
@@ -38,14 +44,35 @@ export class GamePage extends Page {
     this.version = new SemVer(this._getMeta('ogame-version'))
     this.timestamp = $parseInt(this._getMeta('ogame-timestamp'))*1000
     
-    const m = this._getMeta('ogame-universe').match(/^(s\d+)-([a-z]+)/)
+    const m = this._getMeta('ogame-universe').match(/^s(\d+)-([a-z]+)/)
     if (m === null || m.length < 3) {
       throw new Error('invalid universe')
     }
-    [this.universe, this.server, this.region] = m
+    [this.universe, this.serverId, this.region] = m
 
     this.universeName = this._getMeta('ogame-universe-name')
-
+    this.language = this._getMeta('ogame-language')
+    this.isDonutGalaxy = this._getMeta('ogame-donut-galaxy') === '1'
+    this.isDonutSystem = this._getMeta('ogame-donut-system') === '1'
+    this.universeSpeed = $parseFloat(this._getMeta('ogame-universe-speed'))
+    this.universeSpeedFleet = $parseFloat(
+      this._getMeta('ogame-universe-speed-fleet')
+    )
+    this.playerId = this._getMeta('ogame-player-id')
+    this.playerName = this._getMeta('ogame-player-name')
+    this.planetId = this._getMeta('ogame-planet-id')
+    this.planetName = this._getMeta('ogame-planet-name')
+    this.planetCoordinates = Coordinate.from(
+      this._getMeta('ogame-planet-coordinates')
+    )
+    const planetType = this._getMeta('ogame-planet-type')
+    if (!isPlanetType(planetType)) {
+      throw new Error('invalid planet type')
+    }
+    this.planetType = planetType
+    this.allianceId = this._getMeta('ogame-alliance-id')
+    this.allianceName = this._getMeta('ogame-alliance-name')
+    this.allianceTag = this._getMeta('ogame-alliance-tag')
   }
 
   public getMetals (): Numeral {
@@ -74,20 +101,9 @@ export class GamePage extends Page {
     }
     return value
   }
+  
 }
 
-<meta name="ogame-universe-speed" content="4">
-<meta name="ogame-universe-speed-fleet" content="2">
-<meta name="ogame-language" content="tw">
-<meta name="ogame-donut-galaxy" content="1">
-<meta name="ogame-donut-system" content="1">
-<meta name="ogame-player-id" content="105541">
-<meta name="ogame-player-name" content="Destiny">
-<meta name="ogame-planet-id" content="33696423">
-<meta name="ogame-planet-name" content="42 35 38">
-<meta name="ogame-planet-coordinates" content="6:250:7">
-<meta name="ogame-planet-type" content="planet">
-
-<meta name="ogame-alliance-id" content="500004">
-<meta name="ogame-alliance-name" content="Super NewBee">
-<meta name="ogame-alliance-tag" content="NewB">
+function isPlanetType (value: any): value is 'planet' | 'moon' {
+  return typeof value === 'string' && ['planet', 'moon'].includes(value)
+}
