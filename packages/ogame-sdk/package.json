@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "devDependencies": {
     "@types/jquery": "^3.3.38",
-    "@types/lodash": "^4.14.152"
+    "@types/lodash": "^4.14.152",
+    "@types/semver": "^7.2.0"
   },
   "dependencies": {
-    "lodash": "^4.17.15"
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.15",
+    "semver": "^7.3.2"
   }
 }

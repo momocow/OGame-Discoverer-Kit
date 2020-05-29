@@ -1,93 +1,93 @@
-// import { Numeral, ExternalValue } from '@/utils'
-import { expect } from '@/utils/expect'
+import { Numeral } from '@/utils/numeral'
+import { $$, $parseInt } from '@/utils/strict'
 
-export class PageError extends Error {
-  public readonly name: string = 'PageError'
-
-  constructor (public original: Error) {
-    super(original.message)
-    this.stack = original.stack
-  }
-}
-
-export class Page {
-  protected static _try<T> (cb: (...args: any[]) => T): T {
-    try {
-      return cb()
-    } catch (e) {
-      throw new PageError(e)
-    }
-  }
-
-  public static get url (): URL {
-    return this._try(() => new URL(location.href))
-  }
-
-  constructor (
-    public readonly url: URL = Page.url
-  ) { }
-}
-
-export type ServerSlug = [number, string]
-
-export const serverId: ExternalValue<number> = new ExternalValue(
-  function serverId () { return serverSlug.get()[0] }
-)
-
-export const region: ExternalValue<string> = new ExternalValue(
-  function region () { return serverSlug.get()[1] }
-)
-
-export const metals = new ExternalValue<Numeral>(
-  function metals () {
-    return Numeral.parse($('#resources_metal').text())
-  }
-)
-
-export const crystals = new ExternalValue<Numeral>(
-  function crystals () {
-    return Numeral.parse($('#resources_crystal').text())
-  }
-)
-
-export const deteriums = new ExternalValue<Numeral>(
-  function deteriums () {
-    return Numeral.parse($('#resources_deuterium').text())
-  }
-)
-
-export class GamePage extends Page {
-  // public static serverSlug: ExternalValue<ServerSlug> = new ExternalValue(
-  //   function serverSlug () {
-  //     const urlobj = Page.url.get()
-  //     const serverMatched = urlobj.hostname.match(/s(\d+)-([a-z]+)/)
-  //     if (serverMatched === null || serverMatched.length < 3) {
-  //       throw new Error('failed to extract universe info from hostname')
-  //     }
-  //     return [parseInt(serverMatched[1]), serverMatched[2]]
-  //   }
-  // )
-}
-
-
-export interface __Player {
-  playerId: number
-  name: string
-  hasCommander: boolean
-  hasAPassword: boolean
-}
+import { SemVer } from 'semver'
 
 declare global {
   const serverTime: Date
-  const player: __Player
 }
 
-// Variables starts with "__" indicate global variables from OGame
+export class Page {
+  public url: URL = new URL(location.href)
+}
 
-export const __serverTime: ExternalValue<Date> = new ExternalValue(
-  function __serverTime () { return serverTime }
-)
+export class GamePage extends Page {
+  public readonly session: string
+  public readonly version: SemVer
+  public readonly timestamp: number
+  public readonly universe: string
+  public readonly server: string
+  public readonly region: string
+  public readonly language: string
+  public readonly universeName: string
+  public readonly universeSpeed: number
+  public readonly universeSpeedFleet: number
+  public readonly isDonutGalaxy: boolean
+  public readonly isDonutSystem: boolean
+  public readonly playerId: string
+  public readonly playerName: string
+  public readonly planetId: string
+  public readonly planetName: string
 
-export const __player: ExternalValue<__Player> = new ExternalValue(
-  function __player () { return player }
-)
+
+
+  constructor () {
+    super()
+
+    this.session = this._getMeta('ogame-session')
+    this.version = new SemVer(this._getMeta('ogame-version'))
+    this.timestamp = $parseInt(this._getMeta('ogame-timestamp'))*1000
+    
+    const m = this._getMeta('ogame-universe').match(/^(s\d+)-([a-z]+)/)
+    if (m === null || m.length < 3) {
+      throw new Error('invalid universe')
+    }
+    [this.universe, this.server, this.region] = m
+
+    this.universeName = this._getMeta('ogame-universe-name')
+
+  }
+
+  public getMetals (): Numeral {
+    return Numeral.parse($$('#resources_metal').text())
+  }
+
+  public getCrystals (): Numeral {
+    return Numeral.parse($$('#resources_crystal').text())
+  }
+
+  public getDeteriums (): Numeral {
+    return Numeral.parse($$('#resources_deuterium').text())
+  }
+
+  public getServerTime (): Date {
+    if (!(serverTime instanceof Date)) {
+      throw new Error('serverTime is not a Date')
+    }
+    return serverTime
+  }
+
+  private _getMeta (name: string): string {
+    const value = $$(`meta[name=${name}]`).prop('content')
+    if (typeof value !== 'string') {
+      throw new Error(`failed to read mata[name=${name}]`)
+    }
+    return value
+  }
+}
+
+<meta name="ogame-universe-speed" content="4">
+<meta name="ogame-universe-speed-fleet" content="2">
+<meta name="ogame-language" content="tw">
+<meta name="ogame-donut-galaxy" content="1">
+<meta name="ogame-donut-system" content="1">
+<meta name="ogame-player-id" content="105541">
+<meta name="ogame-player-name" content="Destiny">
+<meta name="ogame-planet-id" content="33696423">
+<meta name="ogame-planet-name" content="42 35 38">
+<meta name="ogame-planet-coordinates" content="6:250:7">
+<meta name="ogame-planet-type" content="planet">
+
+<meta name="ogame-alliance-id" content="500004">
+<meta name="ogame-alliance-name" content="Super NewBee">
+<meta name="ogame-alliance-tag" content="NewB">
