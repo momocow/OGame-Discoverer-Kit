@@ -1,9 +1,8 @@
 import { Numeral } from '@/utils/numeral'
-import { $$, $parseInt, $parseFloat } from '@/utils/strict'
-
+import { $parseFloat, $parseInt } from '@/utils/strict'
+import $ from 'jquery'
 import { SemVer } from 'semver'
-
-import { Coordinate } from './location'
+import { Coordinate } from '../location'
 
 declare global {
   const serverTime: Date
@@ -31,19 +30,18 @@ export class GamePage extends Page {
   public readonly planetId: string
   public readonly planetName: string
   public readonly planetCoordinates: Coordinate
-  public readonly planetType: 'planet' | 'moon'
+  public readonly planetType: PlanetType
   public readonly allianceId: string
   public readonly allianceName: string
   public readonly allianceTag: string
-
 
   constructor () {
     super()
 
     this.session = this._getMeta('ogame-session')
     this.version = new SemVer(this._getMeta('ogame-version'))
-    this.timestamp = $parseInt(this._getMeta('ogame-timestamp'))*1000
-    
+    this.timestamp = $parseInt(this._getMeta('ogame-timestamp')) * 1000
+
     const m = this._getMeta('ogame-universe').match(/^s(\d+)-([a-z]+)/)
     if (m === null || m.length < 3) {
       throw new Error('invalid universe')
@@ -76,15 +74,15 @@ export class GamePage extends Page {
   }
 
   public getMetals (): Numeral {
-    return Numeral.parse($$('#resources_metal').text())
+    return Numeral.parse($('#resources_metal').assertOne().text())
   }
 
   public getCrystals (): Numeral {
-    return Numeral.parse($$('#resources_crystal').text())
+    return Numeral.parse($('#resources_crystal').assertOne().text())
   }
 
   public getDeteriums (): Numeral {
-    return Numeral.parse($$('#resources_deuterium').text())
+    return Numeral.parse($('#resources_deuterium').assertOne().text())
   }
 
   public getServerTime (): Date {
@@ -95,15 +93,16 @@ export class GamePage extends Page {
   }
 
   private _getMeta (name: string): string {
-    const value = $$(`meta[name=${name}]`).prop('content')
+    const value = $(`meta[name=${name}]`).assertOne().prop('content')
     if (typeof value !== 'string') {
       throw new Error(`failed to read mata[name=${name}]`)
     }
     return value
   }
-  
 }
 
-function isPlanetType (value: any): value is 'planet' | 'moon' {
+type PlanetType = 'planet' | 'moon'
+
+function isPlanetType (value: any): value is PlanetType {
   return typeof value === 'string' && ['planet', 'moon'].includes(value)
 }

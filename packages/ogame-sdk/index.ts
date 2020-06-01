@@ -1,1 +1,1 @@
-export * from './models/page'
+export * from './models/pages/base'

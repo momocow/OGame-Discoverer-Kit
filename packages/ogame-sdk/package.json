@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "jquery": "^3.5.1",
+    "jquery-assert": "^1.0.2",
     "lodash": "^4.17.15",
     "semver": "^7.3.2"
   }
