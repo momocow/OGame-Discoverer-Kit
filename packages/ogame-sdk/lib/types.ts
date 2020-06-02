@@ -92,3 +92,47 @@ export class Numeral extends Number {
     return Numeral.divide(this, value)
   }
 }
+
+export class Coordinate {
+  constructor (
+    public readonly galaxy: number,
+    public readonly system: number,
+    public readonly position: number
+  ) { }
+
+  public toString (separator: string = ':'): string {
+    return [this.galaxy, this.system, this.position].join(separator)
+  }
+
+  public static from (str: string, separator: string = ':'): Coordinate {
+    const r = new RegExp(`(\\d+)${separator}(\\d+)${separator}(\\d+)`)
+    const coordMatched = str.match(r)
+    if (coordMatched === null) {
+      throw new TypeError('invalid coordinate: ' + str)
+    }
+    return new Coordinate(
+      parseInt(coordMatched[1]),
+      parseInt(coordMatched[2]),
+      parseInt(coordMatched[3])
+    )
+  }
+}
+
+export class Server {
+  constructor (
+    public readonly serverId: string,
+    public readonly region: string
+  ) { }
+
+  public toString (): string {
+    return `s${this.serverId}-${this.region}`
+  }
+
+  public static from (hostname: string): Server {
+    const m = hostname.match(/^s(\d+)-([a-z]+)/)
+    if (m === null || m.length < 3) {
+      throw new Error('invalid server string')
+    }
+    return new Server(m[1], m[2])
+  }
+}

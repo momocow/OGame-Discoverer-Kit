@@ -3,7 +3,7 @@
  */
 // @See https://github.com/facebook/jest/issues/10087
 // import { describe, expect, it } from '@jest/globals'
-import { Numeral } from './numeral'
+import { Numeral } from '@/types'
 
 describe('Numeral', () => {
   it('is an instance of Number', () => {
