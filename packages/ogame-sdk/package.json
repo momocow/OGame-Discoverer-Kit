@@ -1,11 +1,6 @@
 {
   "name": "@momocow/ogame-sdk",
   "version": "0.1.0",
-  "devDependencies": {
-    "@types/jquery": "^3.3.38",
-    "@types/lodash": "^4.14.152",
-    "@types/semver": "^7.2.0"
-  },
   "dependencies": {
     "jquery": "^3.5.1",
     "jquery-assert": "^1.0.2",
