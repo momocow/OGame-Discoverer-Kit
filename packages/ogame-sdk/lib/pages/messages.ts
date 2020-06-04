@@ -1,18 +1,4 @@
-import { DomBranch } from '@/utils'
 
-export class Message implements DomBranch {
-  constructor (
-    public $: JQuery<HTMLLIElement>
-  ) { }
-
-  public getId (): string {
-    return this.$.data('msg-id')
-  }
-
-  public getContent (): string {
-
-  }
-}
 
 export interface Subtab extends DomBranch {
   getMessages (): Message[]

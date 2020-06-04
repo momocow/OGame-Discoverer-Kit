@@ -1,7 +1,3 @@
-export interface DomBranch<T extends HTMLElement = HTMLElement> {
-  $: JQuery<T>
-}
-
 export function $parseInt (str: string, radix?: number): number {
   const n = parseInt(str, radix)
   if (Number.isNaN(n)) {

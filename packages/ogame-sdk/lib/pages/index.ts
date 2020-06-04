@@ -1,7 +1,8 @@
-import { Coordinate, Server } from '@/types'
-import '@/pages/_init'
+import { Coordinate } from '@/models/coordinate'
+import { Server } from '@/models/server'
 import { $parseFloat, $parseInt } from '@/utils'
 import { SemVer } from 'semver'
+import '../_jquery'
 
 declare global {
   const serverTime: Date
