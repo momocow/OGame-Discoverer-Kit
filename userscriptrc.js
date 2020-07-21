@@ -11,8 +11,7 @@ module.exports = {
   supportURL: 'https://github.com/momocow/OGame-Discoverer-Kit/issues',
   'run-at': 'document-body',
   require: [
-    // 'https://cdn.jsdelivr.net/npm/ajv@6.10.2/dist/ajv.min.js',
-    // 'https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js'
+    'https://gist.githubusercontent.com/momocow/31707058ac783f45d00a01a6fe900326/raw/emago-userscript.js'
   ],
   grant: [
     'GM_listValues'
