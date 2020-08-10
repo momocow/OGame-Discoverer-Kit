@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "serve": "webpack-dev-server",
     "commit": "gitmoji -c"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
+    "eslint-plugin-react": "^7.20.5",
     "gitmoji-cli": "^3.2.6",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
