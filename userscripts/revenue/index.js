@@ -3,5 +3,5 @@
 
 (function () {
   // ReactDOM.render(<Hello />, document.body)
-  GM_registerMenuCommand()
+  // GM_registerMenuCommand()
 })()
