@@ -1,7 +1,7 @@
 {
   "name": "@momocow/ogame-discoverer-kit",
   "description": "Everything a discoverer must have at hand",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "build": "webpack",
