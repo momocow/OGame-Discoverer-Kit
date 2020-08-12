@@ -5,8 +5,10 @@ const OGDK_DEV = process.env.OGDK_DEV =
 
 const path = require('path')
 const WebpackUserscript = require('webpack-userscript')
+const DefinePlugin = require('webpack/lib/DefinePlugin')
 
 global.ROOT_DIR = global.ROOT_DIR ?? path.resolve(__dirname)
+global.CORE_PKG_JSON = require('./package.json')
 
 module.exports = {
   mode: OGDK_DEV ? 'development' : 'production',
@@ -32,10 +34,14 @@ module.exports = {
   plugins: [
     new WebpackUserscript({
       headers: path.join(__dirname, 'userscript.js')
+    }),
+    new DefinePlugin({
+      OGDK_CORE_NAME: global.CORE_PKG_JSON.name
     })
   ],
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
+    'emago': 'emago'
   }
 }

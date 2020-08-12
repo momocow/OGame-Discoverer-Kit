@@ -1,6 +1,6 @@
 {
   "globals": {
-    "emago": "readonly",
+    "OGDK_CORE_NAME": "readonly",
     "GM_registerMenuCommand": "readonly"
   }
 }

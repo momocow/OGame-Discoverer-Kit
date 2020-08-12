@@ -1,5 +1,5 @@
 {
-  "name": "ogdk-core",
+  "name": "@ogdk/core",
   "version": "0.0.0",
   "private": true
 }

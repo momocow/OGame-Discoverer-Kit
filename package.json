@@ -1,10 +1,11 @@
 {
-  "name": "@momocow/ogame-discoverer-kit",
+  "name": "ogdk",
   "description": "Everything a discoverer must have at hand",
   "version": "0.1.1",
   "private": true,
   "scripts": {
     "build": "webpack",
+    "lint": "eslint lib userscripts",
     "commit": "gitmoji -c"
   },
   "devDependencies": {
@@ -37,6 +38,8 @@
   "author": "MomoCow",
   "license": "MIT",
   "dependencies": {
+    "p-cancelable": "^2.0.0",
+    "p-timeout": "^3.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "redux": "^4.0.5"

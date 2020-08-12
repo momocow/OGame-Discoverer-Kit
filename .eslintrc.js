@@ -33,10 +33,16 @@ module.exports = {
         ecmaFeatures: {
             "jsx": true
         },
-        ecmaVersion: 11,
+        ecmaVersion: 2020,
         sourceType: "module"
     },
     plugins: [
         "react"
-    ]
+    ],
+    globals: {
+        "OGDK_NAME": "readonly",
+        "OGDK_VERSION": "readonly",
+        "OGDK_NAMESPACE": "readonly",
+        "GM_getValue": "readonly"
+    }
 }

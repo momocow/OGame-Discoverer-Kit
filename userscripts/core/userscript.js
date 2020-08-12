@@ -1,6 +1,6 @@
 const OGDK_DEV = process.env.OGDK_DEV
 
-const { version } = require('../../package.json')
+const { version } = global.PKG_JSON
 
 const LIB_REACT = OGDK_DEV
   ? 'https://unpkg.com/react@16/umd/react.development.js'
@@ -13,7 +13,7 @@ const LIB_REACT_DOM = OGDK_DEV
 module.exports = {
   name: '🚀 OGDK Core',
   version: OGDK_DEV ? `${version}.dev.[buildTime]` : version,
-  namespace: 'cow.moe',
+  namespace: global.NAMESPACE,
   include: 'https://*.ogame.gameforge.com/game/index.php?*',
   updateURL: OGDK_DEV ? '' : 'https://github.com/momocow/OGame-Discoverer-Kit/releases/latest/download/ogdk-core.meta.js',
   downloadURL: OGDK_DEV ? '' : 'https://github.com/momocow/OGame-Discoverer-Kit/releases/latest/download/ogdk-core.user.js',
