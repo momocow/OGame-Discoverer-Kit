@@ -6,12 +6,14 @@ const OGDK_DEV = process.env.OGDK_DEV =
 const path = require('path')
 const WebpackUserscript = require('webpack-userscript')
 
+global.ROOT_DIR = global.ROOT_DIR ?? path.resolve(__dirname)
+
 module.exports = {
   mode: OGDK_DEV ? 'development' : 'production',
   entry: path.join(__dirname, 'index.js'),
   output: {
-    path: path.resolve('dist'),
-    filename: OGDK_DEV ? 'ogdk-revenue.dev.js' : 'ogdk-revenue.js'
+    path: path.join(global.ROOT_DIR, 'dist'),
+    filename: OGDK_DEV ? 'ogdk-core.dev.js' : 'ogdk-core.js'
   },
   module: {
     rules: [

@@ -1,5 +1,7 @@
 const OGDK_DEV = process.env.OGDK_DEV
 
+const { version } = require('../../package.json')
+
 const LIB_REACT = OGDK_DEV
   ? 'https://unpkg.com/react@16/umd/react.development.js'
   : 'https://unpkg.com/react@16/umd/react.production.min.js'
@@ -9,12 +11,12 @@ const LIB_REACT_DOM = OGDK_DEV
   : 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js'
 
 module.exports = {
-  name: 'OGDK: Revenue 📈',
-  version: OGDK_DEV ? '[version].dev.[buildTime]' : '[version]',
+  name: '🚀 OGDK Core',
+  version: OGDK_DEV ? `${version}.dev.[buildTime]` : version,
   namespace: 'cow.moe',
   include: 'https://*.ogame.gameforge.com/game/index.php?*',
-  updateURL: OGDK_DEV ? '' : 'https://cow.moe/OGame-Discoverer-Kit/dist/ogdk-revenue.meta.js',
-  downloadURL: OGDK_DEV ? '' : 'https://cow.moe/OGame-Discoverer-Kit/dist/ogame-discoverer-kit.user.js',
+  updateURL: OGDK_DEV ? '' : 'https://github.com/momocow/OGame-Discoverer-Kit/releases/latest/download/ogdk-core.meta.js',
+  downloadURL: OGDK_DEV ? '' : 'https://github.com/momocow/OGame-Discoverer-Kit/releases/latest/download/ogdk-core.user.js',
   supportURL: 'https://github.com/momocow/OGame-Discoverer-Kit/issues',
   'run-at': 'document-body',
   require: [
