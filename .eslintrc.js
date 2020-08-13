@@ -23,6 +23,8 @@ module.exports = {
         'OGDK_VERSION': 'readonly',
         'OGDK_NAMESPACE': 'readonly',
         'GM_getValue': 'readonly',
-        'GM_listValues': 'readonly'
+        'GM_listValues': 'readonly',
+        "GM_registerMenuCommand": "readonly",
+        "unsafeWindow": "readonly"
     }
 }

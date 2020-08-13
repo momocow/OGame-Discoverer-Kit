@@ -1,6 +1,5 @@
 {
   "globals": {
-    "OGDK_CORE_NAME": "readonly",
-    "GM_registerMenuCommand": "readonly"
+    "OGDK_CORE_NAME": "readonly"
   }
 }

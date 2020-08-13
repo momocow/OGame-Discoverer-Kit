@@ -23,5 +23,13 @@ module.exports = {
     'https://gist.githubusercontent.com/momocow/31707058ac783f45d00a01a6fe900326/raw/c7f09ee5528b53be853482a90118f64bc8f07d6f/emago.js',
     LIB_REACT,
     LIB_REACT_DOM
+  ],
+  grant: [
+    'unsafeWindow',
+    'GM_getValue',
+    'GM_setValue',
+    'GM_deleteValue',
+    'GM_listValues',
+    'GM_registerMenuCommand'
   ]
 }
