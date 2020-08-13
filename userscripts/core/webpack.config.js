@@ -25,7 +25,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            extends: path.join(__dirname, '.babelrc')
+            extends: path.join(global.ROOT_DIR, 'babel.config.json')
           }
         }
       }
@@ -43,5 +43,8 @@ module.exports = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'emago': 'emago'
+  },
+  devServer: {
+    injectClient: false
   }
 }

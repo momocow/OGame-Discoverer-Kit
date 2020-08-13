@@ -6,12 +6,13 @@
   "scripts": {
     "build": "webpack",
     "lint": "eslint lib userscripts",
+    "dev": "webpack-dev-server",
     "commit": "gitmoji -c"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/eslint-parser": "^7.11.3",
-    "@babel/plugin-syntax-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@types/tampermonkey": "^4.0.0",
@@ -40,6 +41,7 @@
   "author": "MomoCow",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "lodash": "^4.17.19",
     "p-cancelable": "^2.0.0",
     "p-timeout": "^3.2.0",

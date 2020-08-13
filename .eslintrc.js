@@ -1,24 +1,3 @@
-const fs = require('fs')
-const path = require('path')
-
-const SRC_DIR = path.join(__dirname, 'userscripts')
-
-const eslintConfigs = []
-
-for (const subdir of fs.readdirSync(SRC_DIR)) {
-    const eslintConfigFiles = [
-        path.resolve(SRC_DIR, subdir, '.eslintrc.js'),
-        path.resolve(SRC_DIR, subdir, '.eslintrc.json')
-    ]
-    for (const configFile of eslintConfigFiles) {
-        if (fs.existsSync(configFile)) {
-            eslintConfigs.push(configFile)
-            console.log('Loading %s', configFile)
-            break
-        }
-    }
-  }
-
 module.exports = {
     parser: '@babel/eslint-parser',
     env: {
@@ -27,8 +6,7 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:react/recommended',
-        ...eslintConfigs
+        'plugin:react/recommended'
     ],
     parserOptions: {
         ecmaFeatures: {
@@ -38,8 +16,7 @@ module.exports = {
         sourceType: 'module'
     },
     plugins: [
-        'react',
-        '@babel/plugin-syntax-class-properties'
+        'react'
     ],
     globals: {
         'OGDK_NAME': 'readonly',

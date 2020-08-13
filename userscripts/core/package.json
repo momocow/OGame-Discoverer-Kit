@@ -1,5 +1,10 @@
 {
   "name": "@ogdk/core",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/momocow/OGame-Discoverer-Kit/issues"
+  },
+  "homepage": "https://github.com/momocow/OGame-Discoverer-Kit#readme",
+  "author": "MomoCow"
 }
