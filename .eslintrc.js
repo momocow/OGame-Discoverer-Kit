@@ -20,29 +20,31 @@ for (const subdir of fs.readdirSync(SRC_DIR)) {
   }
 
 module.exports = {
+    parser: '@babel/eslint-parser',
     env: {
         browser: true,
         es2020: true
     },
     extends: [
-        "eslint:recommended",
-        "plugin:react/recommended",
+        'eslint:recommended',
+        'plugin:react/recommended',
         ...eslintConfigs
     ],
     parserOptions: {
         ecmaFeatures: {
-            "jsx": true
+            'jsx': true
         },
         ecmaVersion: 2020,
-        sourceType: "module"
+        sourceType: 'module'
     },
     plugins: [
-        "react"
+        'react'
     ],
     globals: {
-        "OGDK_NAME": "readonly",
-        "OGDK_VERSION": "readonly",
-        "OGDK_NAMESPACE": "readonly",
-        "GM_getValue": "readonly"
+        'OGDK_NAME': 'readonly',
+        'OGDK_VERSION': 'readonly',
+        'OGDK_NAMESPACE': 'readonly',
+        'GM_getValue': 'readonly',
+        'GM_listValues': 'readonly'
     }
 }
