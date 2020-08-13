@@ -38,7 +38,8 @@ module.exports = {
         sourceType: 'module'
     },
     plugins: [
-        'react'
+        'react',
+        '@babel/plugin-syntax-class-properties'
     ],
     globals: {
         'OGDK_NAME': 'readonly',
