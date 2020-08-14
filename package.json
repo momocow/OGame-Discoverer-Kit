@@ -7,7 +7,8 @@
     "build": "webpack",
     "lint": "eslint lib userscripts",
     "dev": "webpack-dev-server",
-    "commit": "gitmoji -c"
+    "commit": "gitmoji -c",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -15,11 +16,16 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@types/jest": "^26.0.9",
     "@types/tampermonkey": "^4.0.0",
+    "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
     "eslint": "^7.6.0",
+    "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-react": "^7.20.5",
     "gitmoji-cli": "^3.2.6",
+    "jest": "^26.4.0",
+    "jest-tobetype": "^1.2.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",

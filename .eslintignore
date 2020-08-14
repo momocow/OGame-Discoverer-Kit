@@ -1,4 +1,5 @@
-webpack.config.js
-userscript.js
+*.config.js
+*.setup.js
 .eslintrc.js
+build/
 dist/

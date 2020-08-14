@@ -4,13 +4,9 @@ const DefinePlugin = require('webpack/lib/DefinePlugin')
 const { inspect } = require('util')
 const mergeWith = require('lodash/mergeWith')
 
-const ROOT_DIR = path.resolve(__dirname)
-const ENTRY_DIR = path.join(__dirname, 'userscripts')
-const PKG_JSON = require('./package.json')
+const G = require('./build/globals')
 
-global.ROOT_DIR = ROOT_DIR
-global.PKG_JSON = PKG_JSON
-global.NAMESPACE = 'cow.moe'
+const ENTRY_DIR = path.join(global.ROOT_DIR, 'userscripts')
 
 function concatArray (objValue, srcValue) {
   if (Array.isArray(objValue)) {
@@ -22,15 +18,11 @@ function commonConfig () {
   return {
     resolve: {
       alias: {
-        '@lib': path.resolve(ROOT_DIR, 'lib')
+        '@lib': path.resolve(global.ROOT_DIR, 'lib')
       }
     },
     plugins: [
-      new DefinePlugin({
-        OGDK_NAME: PKG_JSON.name,
-        OGDK_VERSION: PKG_JSON.version,
-        OGDK_NAMESPACE: global.NAMESPACE
-      })
+      new DefinePlugin(G)
     ]
   }
 }

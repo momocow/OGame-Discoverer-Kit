@@ -33,7 +33,7 @@ module.exports = {
   },
   plugins: [
     new WebpackUserscript({
-      headers: path.join(__dirname, 'userscript.js')
+      headers: path.join(__dirname, 'userscript.config.js')
     }),
     new DefinePlugin({
       OGDK_CORE_NAME: global.CORE_PKG_JSON.name

@@ -26,5 +26,12 @@ module.exports = {
         'GM_listValues': 'readonly',
         "GM_registerMenuCommand": "readonly",
         "unsafeWindow": "readonly"
-    }
+    },
+    overrides: [
+        {
+            files: [ '*.test.js' ],
+            plugins: [ 'jest' ],
+            extends: [ 'plugin:jest/recommended' ]
+        }
+    ]
 }
