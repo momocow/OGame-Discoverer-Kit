@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-import { goog } from '@lib/utils'
+import { goog } from '@lib/utils/misc'
 
 export default class MigrationConfirm extends React.Component {
   static propTypes = {
