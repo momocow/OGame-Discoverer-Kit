@@ -29,7 +29,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: [ '*.test.js' ],
+            files: [ '*.spec.js' ],
             plugins: [ 'jest' ],
             extends: [ 'plugin:jest/recommended' ]
         }

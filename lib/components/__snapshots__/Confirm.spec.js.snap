@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Confirm /> 1`] = `
+<WithStyles(ForwardRef(Dialog))
+  aria-describedby="ogdk-1"
+  aria-labelledby="ogdk-0"
+  disableBackdropClick={true}
+  open={false}
+>
+  <WithStyles(ForwardRef(DialogTitle))
+    id="ogdk-0"
+  >
+    Confirm Test
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))
+      id="ogdk-1"
+    >
+      This is a test for Confirm component.
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      autoFocus={true}
+      color="primary"
+    />
+    <WithStyles(ForwardRef(Button)) />
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;
+
+exports[`<Confirm /> 2`] = `
+<WithStyles(ForwardRef(Dialog))
+  aria-describedby="ogdk-3"
+  aria-labelledby="ogdk-2"
+  disableBackdropClick={true}
+  open={true}
+>
+  <WithStyles(ForwardRef(DialogTitle))
+    id="ogdk-2"
+  >
+    Confirm Test
+  </WithStyles(ForwardRef(DialogTitle))>
+  <WithStyles(ForwardRef(DialogContent))>
+    <WithStyles(ForwardRef(DialogContentText))
+      id="ogdk-3"
+    >
+      This is a test for Confirm component.
+    </WithStyles(ForwardRef(DialogContentText))>
+  </WithStyles(ForwardRef(DialogContent))>
+  <WithStyles(ForwardRef(DialogActions))>
+    <WithStyles(ForwardRef(Button))
+      autoFocus={true}
+      color="primary"
+    />
+    <WithStyles(ForwardRef(Button)) />
+  </WithStyles(ForwardRef(DialogActions))>
+</WithStyles(ForwardRef(Dialog))>
+`;
