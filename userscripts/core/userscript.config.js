@@ -2,6 +2,8 @@ const OGDK_DEV = process.env.OGDK_DEV
 
 const { version } = global.PKG_JSON
 
+const EMAGO_VERSION = '60450acf453da06a807b617339efffc64f8e0f6d'
+
 const LIB_REACT = OGDK_DEV
   ? 'https://unpkg.com/react@16/umd/react.development.js'
   : 'https://unpkg.com/react@16/umd/react.production.min.js'
@@ -20,7 +22,7 @@ module.exports = {
   supportURL: 'https://github.com/momocow/OGame-Discoverer-Kit/issues',
   'run-at': 'document-body',
   require: [
-    'https://gist.githubusercontent.com/momocow/31707058ac783f45d00a01a6fe900326/raw/c7f09ee5528b53be853482a90118f64bc8f07d6f/emago.js',
+    `https://gist.githubusercontent.com/momocow/31707058ac783f45d00a01a6fe900326/raw/${EMAGO_VERSION}/emago.js`,
     LIB_REACT,
     LIB_REACT_DOM
   ],

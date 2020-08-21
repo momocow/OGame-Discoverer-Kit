@@ -12,7 +12,7 @@ global.CORE_PKG_JSON = require('./package.json')
 
 module.exports = {
   mode: OGDK_DEV ? 'development' : 'production',
-  entry: path.join(__dirname, 'index.js'),
+  entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(global.ROOT_DIR, 'dist'),
     filename: OGDK_DEV ? 'ogdk-core.dev.js' : 'ogdk-core.js'
